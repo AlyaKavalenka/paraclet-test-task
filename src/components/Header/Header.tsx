@@ -31,9 +31,11 @@ export default function Header(props: IHeaderProps) {
         </Link>
         <Link
           href="/"
-          className={`nav__link ${
-            activePage === "MarkedPage" ? "nav__link_active" : ""
-          }`}
+          className={
+            HeaderStyles.nav__link || activePage === "MarkedPage"
+              ? HeaderStyles.nav__link_active
+              : ""
+          }
         >
           Избранное
         </Link>
