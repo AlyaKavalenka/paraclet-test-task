@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "@/assets/svg/logo";
+import HeaderStyles from "./header.module.scss";
 
 type ActivePage = "SearchPage" | "MarkedPage";
 
@@ -11,18 +12,20 @@ export default function Header(props: IHeaderProps) {
   const { activePage } = props;
 
   return (
-    <header className="header">
+    <header className={HeaderStyles.header}>
       <section className="logo">
         <Link href="/">
           <Logo />
         </Link>
       </section>
-      <section className="nav">
+      <section className={HeaderStyles.nav}>
         <Link
           href="/"
-          className={`nav__link ${
-            activePage === "SearchPage" ? "nav__link_active" : ""
-          }`}
+          className={
+            HeaderStyles.nav__link || activePage === "SearchPage"
+              ? HeaderStyles.nav__link_active
+              : ""
+          }
         >
           Поиск Вакансий
         </Link>

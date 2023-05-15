@@ -1,0 +1,22 @@
+@import "../../styles/variables";
+
+.header {
+  display: flex;
+  gap: 19.44vw;
+  align-items: center;
+  padding: 24px 11.25vw;
+
+  background: $white;
+
+  .nav {
+    display: flex;
+    gap: 4.16vw;
+
+    &__link {
+      &_active {
+        font-weight: 500;
+        color: $blue-500-main;
+      }
+    }
+  }
+}
