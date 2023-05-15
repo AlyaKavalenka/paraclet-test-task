@@ -1,1 +1,17 @@
 @import '../styles/variables';
+
+.home {
+  &__main {
+    display: flex;
+    gap: 1.94vw;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  .searchVacancy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
