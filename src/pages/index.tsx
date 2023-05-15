@@ -2,9 +2,9 @@ import Header from "@/components/Header/Header";
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <Header activePage="SearchPage" />
       <p>Heloo World</p>
-    </div>
+    </main>
   );
 }
