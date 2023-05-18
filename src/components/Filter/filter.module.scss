@@ -1,12 +1,23 @@
 /* stylelint-disable selector-class-pattern */
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .filter {
+  @include border($color: $grey-200, $rad: 12px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+  background-color: $white;
+
   &__header {
     display: flex;
     gap: 1px;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 12px;
   }
 
   &__headerText {
