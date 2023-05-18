@@ -1,9 +1,21 @@
 import { useForm } from "@mantine/form";
 import { Select, NumberInput, Button } from "@mantine/core";
+import { useEffect } from "react";
 import filterStyles from "./filter.module.scss";
 import Down from "@/assets/svg/down";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { fetchCatalogues } from "@/store/Slicers/CataloguesSlice";
 
 export default function Filter() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCatalogues());
+  }, [dispatch]);
+
+  const catalogues = useAppSelector((state) => state.cataloguesSlice.value);
+  const cataloguesTitles = catalogues.map((item) => item.title_rus);
+
   const form = useForm({
     initialValues: {
       sphere: "",
@@ -26,7 +38,7 @@ export default function Filter() {
       <section className={filterStyles.filter__main}>
         <div className={filterStyles.filter__sphere}>
           <Select
-            data={[]}
+            data={cataloguesTitles}
             label="Отрасль"
             rightSection={<Down />}
             {...form.getInputProps("sphere")}
