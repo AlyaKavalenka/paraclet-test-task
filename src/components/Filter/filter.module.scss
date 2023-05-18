@@ -71,6 +71,14 @@
       font-weight: 700;
       color: $black;
     }
+
+    input {
+      @include border($color: $grey-300);
+
+      &:hover {
+        @include border($color: $blue-500-main);
+      }
+    }
   }
 
   &__salaryInputs {
