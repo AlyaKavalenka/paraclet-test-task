@@ -45,7 +45,7 @@ export default function Filter() {
             {...form.getInputProps("sphere")}
           />
         </div>
-        <div className={filterStyles.filter__salary}>
+        <div className={filterStyles.filter__salaryInputs}>
           <NumberInput
             placeholder="От"
             label="Оклад"
