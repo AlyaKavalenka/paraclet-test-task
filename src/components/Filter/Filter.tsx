@@ -5,6 +5,7 @@ import filterStyles from "./filter.module.scss";
 import Down from "@/assets/svg/down";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchCatalogues } from "@/store/Slicers/CataloguesSlice";
+import CrossIcon from "@/assets/svg/crossIcon";
 
 export default function Filter() {
   const dispatch = useAppDispatch();
@@ -30,9 +31,9 @@ export default function Filter() {
     <form className={filterStyles.filter}>
       <section className={filterStyles.filter__header}>
         <span className={filterStyles.filter__headerText}>Фильтры</span>
-        <button type="button">
+        <button type="button" className={filterStyles.filter__resetBtn}>
           <span>Сбросить все</span>
-          <span>+</span>
+          <CrossIcon />
         </button>
       </section>
       <section className={filterStyles.filter__main}>
