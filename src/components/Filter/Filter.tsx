@@ -50,8 +50,13 @@ export default function Filter() {
             placeholder="От"
             label="Оклад"
             {...form.getInputProps("salary.from")}
+            className={filterStyles.filter__numberInput}
           />
-          <NumberInput placeholder="До" {...form.getInputProps("salary.to")} />
+          <NumberInput
+            placeholder="До"
+            {...form.getInputProps("salary.to")}
+            className={filterStyles.filter__numberInput}
+          />
         </div>
       </section>
       <Button type="submit">Применить</Button>
