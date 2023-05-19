@@ -59,7 +59,9 @@ export default function Filter() {
           />
         </div>
       </section>
-      <Button type="submit">Применить</Button>
+      <Button type="submit" className={filterStyles.filter__btn}>
+        Применить
+      </Button>
     </form>
   );
 }

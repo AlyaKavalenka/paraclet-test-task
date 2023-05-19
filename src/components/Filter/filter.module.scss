@@ -90,8 +90,21 @@
   &__numberInput {
     button {
       color: $grey-500;
-      
+
       border: none;
+    }
+  }
+
+  &__btn {
+    background-color: $blue-500-main;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $blue-400;
+    }
+
+    &:active {
+      background-color: $blue-600;
     }
   }
 }
