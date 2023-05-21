@@ -14,3 +14,11 @@ export interface ICatalogues {
     }
   ];
 }
+
+export interface IVacancies {
+  objects: [
+    {
+      catalogues: ICatalogues;
+    }
+  ];
+}

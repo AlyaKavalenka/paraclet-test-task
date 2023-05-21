@@ -5,9 +5,11 @@ import {
   combineReducers,
 } from "@reduxjs/toolkit";
 import CataloguesSlice from "./Slicers/CataloguesSlice";
+import VacanciesSlice from "./Slicers/VacanciesSlice";
 
 const rootReducer = combineReducers({
   cataloguesSlice: CataloguesSlice,
+  vacanciesSlice: VacanciesSlice,
 });
 
 export const store = configureStore({
