@@ -18,7 +18,19 @@ export interface ICatalogues {
 export interface IVacancies {
   objects: [
     {
+      id: number;
       catalogues: ICatalogues;
+      profession: string;
+      firmName: string;
+      town: {
+        title: string;
+      };
+      type_of_work: {
+        title: string;
+      };
+      payment_to: number;
+      payment_from: number;
+      currency: string;
     }
   ];
 }
