@@ -24,36 +24,40 @@ export default function Vacancies() {
     vacanciesJSX = vacancies.objects.map((vacancyObj) => {
       let salary;
       if (vacancyObj.payment_from && vacancyObj.payment_to) {
-        salary = `${vacancyObj.payment_from} - ${vacancyObj.payment_to}`;
+        salary = `з/п ${vacancyObj.payment_from} - ${vacancyObj.payment_to} ${vacancyObj.currency}`;
       } else if (vacancyObj.payment_from && !vacancyObj.payment_to) {
-        salary = `от ${vacancyObj.payment_from}`;
+        salary = `з/п от ${vacancyObj.payment_from} ${vacancyObj.currency}`;
       } else if (!vacancyObj.payment_from && vacancyObj.payment_to) {
-        salary = `от ${vacancyObj.payment_to}`;
+        salary = `з/п от ${vacancyObj.payment_to} ${vacancyObj.currency}`;
       } else {
         salary = "";
       }
 
       return (
         <article key={vacancyObj.id} className={vacanciesStyles.vacancy}>
-          <section>
-            <span>{vacancyObj.profession}</span>
-            <section>
-              {salary && (
-                <section>
-                  <span>з/п</span>
-                  <span>{salary}</span>
-                  <span>{vacancyObj.currency}</span>
-                  <span>•</span>
-                  {vacancyObj.type_of_work.title && (
-                    <span>{vacancyObj.type_of_work.title}</span>
-                  )}
-                </section>
-              )}
-            </section>
+          <section className={vacanciesStyles.vacancy__info}>
+            <span className={vacanciesStyles.vacancy__proff}>
+              {vacancyObj.profession}
+            </span>
+            {salary && (
+              <section className={vacanciesStyles.vacancy__salaryNType}>
+                <span className={vacanciesStyles.vacancy__text_salary}>
+                  {salary}
+                </span>
+                <span className={vacanciesStyles.vacancy__text_dot}>•</span>
+                {vacancyObj.type_of_work.title && (
+                  <span className={vacanciesStyles.vacancy__text}>
+                    {vacancyObj.type_of_work.title}
+                  </span>
+                )}
+              </section>
+            )}
             {vacancyObj.town.title && (
-              <section>
+              <section className={vacanciesStyles.vacancy__location}>
                 <LocationIcon />
-                <span>{vacancyObj.town.title}</span>
+                <span className={vacanciesStyles.vacancy__text}>
+                  {vacancyObj.town.title}
+                </span>
               </section>
             )}
           </section>
