@@ -1,0 +1,111 @@
+/* stylelint-disable selector-class-pattern */
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.filter {
+  @include border($color: $grey-200, $rad: 12px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: flex-start;
+  padding: 20px;
+
+  background-color: $white;
+
+  &__header {
+    display: flex;
+    gap: 1px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  &__headerText {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $black;
+  }
+
+  &__resetBtn {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 0;
+
+    font-family: Inter, sans-serif;
+    font-size: .875rem;
+    font-weight: 500;
+    color: $grey-500;
+    cursor: pointer;
+
+    background: none;
+    border: none;
+    outline: none;
+
+    transition: $transition;
+
+    &:hover {
+      color: $blue-400;
+
+      .crossIcon {
+        stroke: $blue-400;
+      }
+    }
+
+    &:active {
+      color: $blue-500-main;
+
+      .crossIcon {
+        stroke: $blue-500-main;
+      }
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $black;
+    }
+
+    input {
+      @include border($color: $grey-300);
+
+      &:hover {
+        @include border($color: $blue-500-main);
+      }
+    }
+  }
+
+  &__salaryInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__numberInput {
+    button {
+      color: $grey-500;
+
+      border: none;
+    }
+  }
+
+  &__btn {
+    background-color: $blue-500-main;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $blue-400;
+    }
+
+    &:active {
+      background-color: $blue-600;
+    }
+  }
+}

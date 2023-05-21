@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.search {
+  @include border($color: $grey-300);
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding-right: 12px;
+
+  font-size: .875rem;
+
+  &__input {
+    input {
+      height: 100%;
+
+      border: none;
+    }
+  }
+
+  &__btn {
+    padding: 5.5px 20px;
+
+    font-weight: 500;
+
+    background: $blue-500-main;
+    border-radius: 8px;
+  }
+
+  &:hover {
+    @include border($color: $blue-500-main);
+  }
+
+  &:focus-within {
+    @include border($color: $blue-500-main);
+    caret-color: $blue-500-main;
+  }
+}

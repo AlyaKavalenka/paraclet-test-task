@@ -1,0 +1,31 @@
+@import 'variables';
+@import 'mixins';
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+#__next,
+body {
+  height: inherit;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+#__next {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+a {
+  color: $black;
+  text-decoration: none;
+}
