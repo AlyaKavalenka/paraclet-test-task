@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { IVacancies } from "@/types/types";
 import LocationIcon from "@/assets/svg/locationIcon";
 import StarIcon from "@/assets/svg/starIcon";
+import vacanciesStyles from "./vacancies.module.scss";
 
 export default function Vacancies() {
   const dispatch = useAppDispatch();
@@ -67,10 +68,23 @@ export default function Vacancies() {
   }
 
   return (
-    <div>
-      {isLoading && <Loader color="#5E96FC" variant="dots" size="lg" />}
-      {error && <h3>Something went wrong...</h3>}
-      {vacancies.objects && <section>{vacanciesJSX}</section>}
+    <div className={vacanciesStyles.vacanciesBlock}>
+      <section className={vacanciesStyles.vacanciesBlock__preload}>
+        {isLoading && (
+          <Loader
+            color="#5E96FC"
+            variant="dots"
+            size="lg"
+            className={vacanciesStyles.loader}
+          />
+        )}
+        {error && <h3>Something went wrong...</h3>}
+      </section>
+      {vacancies.objects && (
+        <section className={vacanciesStyles.vacanciesBlock__vacancies}>
+          {vacanciesJSX}
+        </section>
+      )}
     </div>
   );
 }
