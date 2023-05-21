@@ -62,7 +62,11 @@ export default function Vacancies() {
             )}
           </section>
           <aside>
-            <button type="button" onClick={() => {}}>
+            <button
+              type="button"
+              onClick={() => {}}
+              className={vacanciesStyles.vacancy__btn}
+            >
               <StarIcon mode="empty" />
             </button>
           </aside>
