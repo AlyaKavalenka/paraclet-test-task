@@ -15,4 +15,15 @@
     flex-direction: column;
     gap: 16px;
   }
+
+  .vacancy {
+    @include border($color: $grey-200, $rad: 12px);
+    
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px;
+
+    background: $white;
+  }
 }

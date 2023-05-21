@@ -34,7 +34,7 @@ export default function Vacancies() {
       }
 
       return (
-        <article key={vacancyObj.id}>
+        <article key={vacancyObj.id} className={vacanciesStyles.vacancy}>
           <section>
             <span>{vacancyObj.profession}</span>
             <section>
