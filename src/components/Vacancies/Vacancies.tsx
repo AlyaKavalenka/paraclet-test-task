@@ -4,7 +4,7 @@ import { fetchVacancies } from "@/store/Slicers/VacanciesSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { IVacancies } from "@/types/types";
 import vacanciesStyles from "./vacancies.module.scss";
-import VacanciesJSXArray from "../VacanciesJSXArray/VacanciesJSXArray";
+import VacancyWithLink from "../VacancyWithLink/VacancyWithLink";
 
 export default function Vacancies() {
   const dispatch = useAppDispatch();
@@ -33,7 +33,9 @@ export default function Vacancies() {
       </section>
       {vacancies.objects && (
         <section className={vacanciesStyles.vacanciesBlock__vacancies}>
-          {VacanciesJSXArray(vacancies.objects)}
+          {vacancies.objects.map((item) => (
+            <VacancyWithLink vacancyObj={item} key={item.id} />
+          ))}
         </section>
       )}
     </div>

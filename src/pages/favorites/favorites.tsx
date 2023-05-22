@@ -2,7 +2,7 @@ import Header from "@/components/Header/Header";
 import favoritesStyles from "./favorites.module.scss";
 import { useAppSelector } from "@/store/hooks";
 import NoFavorites from "@/components/NoFavorites/NoFavorites";
-import VacanciesJSXArray from "@/components/VacanciesJSXArray/VacanciesJSXArray";
+import VacancyWithLink from "@/components/VacancyWithLink/VacancyWithLink";
 
 export default function FavoritesPage() {
   const faveVacancies = useAppSelector((state) => state.favorites.value);
@@ -15,7 +15,9 @@ export default function FavoritesPage() {
           <div className={favoritesStyles.favorites__mainWrapper}>
             {faveVacancies.length ? (
               <section className={favoritesStyles.favorites__vacancies}>
-                {VacanciesJSXArray(faveVacancies)}
+                {faveVacancies.map((item) => (
+                  <VacancyWithLink vacancyObj={item} key={item.id} />
+                ))}
               </section>
             ) : (
               <NoFavorites />
