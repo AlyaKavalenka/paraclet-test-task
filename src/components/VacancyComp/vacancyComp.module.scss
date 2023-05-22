@@ -1,11 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-@mixin vacancies-text {
-  line-height: 1.25;
-  color: $black;
-}
-
 .vacancy {
   @include border($color: $grey-200, $rad: 12px);
 

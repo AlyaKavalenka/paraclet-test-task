@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import Header from "@/components/Header/Header";
-import { IVacancy } from "@/types/types";
 import vacancyStyles from "./vacancy.module.scss";
 import VacancyComp from "@/components/VacancyComp/VacancyComp";
 import { useAppSelector } from "@/store/hooks";
