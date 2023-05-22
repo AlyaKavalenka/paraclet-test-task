@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Loader } from "@mantine/core";
+import Link from "next/link";
 import { fetchVacancies } from "@/store/Slicers/VacanciesSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { IVacancies } from "@/types/types";
@@ -34,43 +35,48 @@ export default function Vacancies() {
       }
 
       return (
-        <article key={vacancyObj.id} className={vacanciesStyles.vacancy}>
-          <section className={vacanciesStyles.vacancy__info}>
-            <span className={vacanciesStyles.vacancy__proff}>
-              {vacancyObj.profession}
-            </span>
-            {salary && (
-              <section className={vacanciesStyles.vacancy__salaryNType}>
-                <span className={vacanciesStyles.vacancy__text_salary}>
-                  {salary}
-                </span>
-                <span className={vacanciesStyles.vacancy__text_dot}>•</span>
-                {vacancyObj.type_of_work.title && (
-                  <span className={vacanciesStyles.vacancy__text}>
-                    {vacancyObj.type_of_work.title}
+        <Link href="/vacancy" key={vacancyObj.id}>
+          <article className={vacanciesStyles.vacancy}>
+            <section className={vacanciesStyles.vacancy__info}>
+              <span className={vacanciesStyles.vacancy__proff}>
+                {vacancyObj.profession}
+              </span>
+              {salary && (
+                <section className={vacanciesStyles.vacancy__salaryNType}>
+                  <span className={vacanciesStyles.vacancy__text_salary}>
+                    {salary}
                   </span>
-                )}
-              </section>
-            )}
-            {vacancyObj.town.title && (
-              <section className={vacanciesStyles.vacancy__location}>
-                <LocationIcon />
-                <span className={vacanciesStyles.vacancy__text}>
-                  {vacancyObj.town.title}
-                </span>
-              </section>
-            )}
-          </section>
-          <aside>
-            <button
-              type="button"
-              onClick={() => {}}
-              className={vacanciesStyles.vacancy__btn}
-            >
-              <StarIcon mode="empty" />
-            </button>
-          </aside>
-        </article>
+                  <span className={vacanciesStyles.vacancy__text_dot}>•</span>
+                  {vacancyObj.type_of_work.title && (
+                    <span className={vacanciesStyles.vacancy__text}>
+                      {vacancyObj.type_of_work.title}
+                    </span>
+                  )}
+                </section>
+              )}
+              {vacancyObj.town.title && (
+                <section className={vacanciesStyles.vacancy__location}>
+                  <LocationIcon />
+                  <span className={vacanciesStyles.vacancy__text}>
+                    {vacancyObj.town.title}
+                  </span>
+                </section>
+              )}
+            </section>
+            <aside>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("click on star");
+                }}
+                className={vacanciesStyles.vacancy__btn}
+              >
+                <StarIcon mode="empty" />
+              </button>
+            </aside>
+          </article>
+        </Link>
       );
     });
   }
