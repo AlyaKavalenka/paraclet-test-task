@@ -35,7 +35,7 @@ export default function Vacancies() {
       }
 
       return (
-        <Link href="/vacancy" key={vacancyObj.id}>
+        <Link href={`/vacancy/${vacancyObj.id}`} key={vacancyObj.id}>
           <article className={vacanciesStyles.vacancy}>
             <section className={vacanciesStyles.vacancy__info}>
               <span className={vacanciesStyles.vacancy__proff}>
