@@ -5,11 +5,24 @@ import StarIcon from "@/assets/svg/starIcon";
 import { IVacancy } from "@/types/types";
 import vacancyCompStyles from "./vacancyComp.module.scss";
 import vacancyPageStyles from "../../pages/vacancy/vacancy.module.scss";
+import { useAppDispatch } from "@/store/hooks";
+import { addNewFavorite } from "@/store/Slicers/FavoritesSlice";
 
 export default function VacancyComp(props: IVacancy) {
-  const { payment_from, payment_to, currency, profession, type_of_work, town } =
-    props;
+  const {
+    payment_from,
+    payment_to,
+    currency,
+    profession,
+    type_of_work,
+    town,
+    id,
+    catalogues,
+    firmName,
+    vacancyRichText,
+  } = props;
   const currentPatch = useRouter().pathname;
+  const dispatch = useAppDispatch();
   let currentStyle;
 
   if (currentPatch === "/vacancy/[vacancyid]") {
@@ -58,7 +71,20 @@ export default function VacancyComp(props: IVacancy) {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            console.log("click on star");
+            dispatch(
+              addNewFavorite({
+                id,
+                catalogues,
+                profession,
+                firmName,
+                town,
+                type_of_work,
+                payment_to,
+                payment_from,
+                currency,
+                vacancyRichText,
+              })
+            );
           }}
           className={vacancyCompStyles.vacancy__btn}
         >

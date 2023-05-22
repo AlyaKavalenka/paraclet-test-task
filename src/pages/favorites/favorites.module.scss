@@ -25,4 +25,10 @@
     justify-content: flex-start;
     width: 53.68vw;
   }
+
+  &__vacancies {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 }
