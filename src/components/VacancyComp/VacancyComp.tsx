@@ -5,7 +5,7 @@ import StarIcon from "@/assets/svg/starIcon";
 import { IVacancy } from "@/types/types";
 import vacancyCompStyles from "./vacancyComp.module.scss";
 import vacancyPageStyles from "../../pages/vacancy/vacancy.module.scss";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addNewFavorite } from "@/store/Slicers/FavoritesSlice";
 
 export default function VacancyComp(props: IVacancy) {
@@ -23,6 +23,10 @@ export default function VacancyComp(props: IVacancy) {
   } = props;
   const currentPatch = useRouter().pathname;
   const dispatch = useAppDispatch();
+  const faveArray = useAppSelector((state) => state.favorites.value);
+
+  const isFave = faveArray.findIndex((item) => item.id === id);
+
   let currentStyle;
 
   if (currentPatch === "/vacancy/[vacancyid]") {
@@ -88,7 +92,7 @@ export default function VacancyComp(props: IVacancy) {
           }}
           className={vacancyCompStyles.vacancy__btn}
         >
-          <StarIcon mode="empty" />
+          <StarIcon mode={isFave !== -1 ? "full" : "empty"} />
         </button>
       </aside>
     </article>
