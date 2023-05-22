@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { Loader } from "@mantine/core";
+import Link from "next/link";
 import { fetchVacancies } from "@/store/Slicers/VacanciesSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { IVacancies } from "@/types/types";
-import LocationIcon from "@/assets/svg/locationIcon";
-import StarIcon from "@/assets/svg/starIcon";
 import vacanciesStyles from "./vacancies.module.scss";
+import VacancyComp from "../VacancyComp/VacancyComp";
+import { clickedVacancy } from "@/store/Slicers/ClickedVacancySlice";
 
 export default function Vacancies() {
   const dispatch = useAppDispatch();
@@ -22,55 +23,29 @@ export default function Vacancies() {
   let vacanciesJSX;
   if (vacancies.objects) {
     vacanciesJSX = vacancies.objects.map((vacancyObj) => {
-      let salary;
-      if (vacancyObj.payment_from && vacancyObj.payment_to) {
-        salary = `з/п ${vacancyObj.payment_from} - ${vacancyObj.payment_to} ${vacancyObj.currency}`;
-      } else if (vacancyObj.payment_from && !vacancyObj.payment_to) {
-        salary = `з/п от ${vacancyObj.payment_from} ${vacancyObj.currency}`;
-      } else if (!vacancyObj.payment_from && vacancyObj.payment_to) {
-        salary = `з/п от ${vacancyObj.payment_to} ${vacancyObj.currency}`;
-      } else {
-        salary = "";
-      }
-
       return (
-        <article key={vacancyObj.id} className={vacanciesStyles.vacancy}>
-          <section className={vacanciesStyles.vacancy__info}>
-            <span className={vacanciesStyles.vacancy__proff}>
-              {vacancyObj.profession}
-            </span>
-            {salary && (
-              <section className={vacanciesStyles.vacancy__salaryNType}>
-                <span className={vacanciesStyles.vacancy__text_salary}>
-                  {salary}
-                </span>
-                <span className={vacanciesStyles.vacancy__text_dot}>•</span>
-                {vacancyObj.type_of_work.title && (
-                  <span className={vacanciesStyles.vacancy__text}>
-                    {vacancyObj.type_of_work.title}
-                  </span>
-                )}
-              </section>
-            )}
-            {vacancyObj.town.title && (
-              <section className={vacanciesStyles.vacancy__location}>
-                <LocationIcon />
-                <span className={vacanciesStyles.vacancy__text}>
-                  {vacancyObj.town.title}
-                </span>
-              </section>
-            )}
-          </section>
-          <aside>
-            <button
-              type="button"
-              onClick={() => {}}
-              className={vacanciesStyles.vacancy__btn}
-            >
-              <StarIcon mode="empty" />
-            </button>
-          </aside>
-        </article>
+        <Link
+          href={`/vacancy/${vacancyObj.id}`}
+          key={vacancyObj.id}
+          onClick={() => dispatch(clickedVacancy(vacancyObj))}
+        >
+          <VacancyComp
+            id={vacancyObj.id}
+            catalogues={vacancyObj.catalogues}
+            profession={vacancyObj.profession}
+            firmName={vacancyObj.firmName}
+            town={{
+              title: vacancyObj.town.title,
+            }}
+            type_of_work={{
+              title: vacancyObj.type_of_work.title,
+            }}
+            payment_to={vacancyObj.payment_to}
+            payment_from={vacancyObj.payment_from}
+            currency={vacancyObj.currency}
+            vacancyRichText={vacancyObj.vacancyRichText}
+          />
+        </Link>
       );
     });
   }

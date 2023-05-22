@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .search {
-  @include border($color: $grey-300);
+  @include border($color: $grey-200);
 
   position: relative;
 
@@ -14,10 +14,15 @@
 
   font-size: .875rem;
 
+  background: $white;
+
   &__input {
+    width: 100%;
+
     input {
       height: 100%;
 
+      background: transparent;
       border: none;
     }
   }

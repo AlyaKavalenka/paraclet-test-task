@@ -2,3 +2,8 @@
   border: $width solid $color;
   border-radius: $rad;
 }
+
+@mixin vacancies-text {
+  line-height: 1.25;
+  color: $black;
+}
