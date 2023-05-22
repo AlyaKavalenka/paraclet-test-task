@@ -6,10 +6,12 @@ import {
 } from "@reduxjs/toolkit";
 import CataloguesSlice from "./Slicers/CataloguesSlice";
 import VacanciesSlice from "./Slicers/VacanciesSlice";
+import ClickedVacancySlice from "./Slicers/ClickedVacancySlice";
 
 const rootReducer = combineReducers({
   cataloguesSlice: CataloguesSlice,
   vacanciesSlice: VacanciesSlice,
+  clickedVacancy: ClickedVacancySlice,
 });
 
 export const store = configureStore({

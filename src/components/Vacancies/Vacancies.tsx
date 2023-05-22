@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { IVacancies } from "@/types/types";
 import vacanciesStyles from "./vacancies.module.scss";
 import VacancyComp from "../VacancyComp/VacancyComp";
+import { clickedVacancy } from "@/store/Slicers/ClickedVacancySlice";
 
 export default function Vacancies() {
   const dispatch = useAppDispatch();
@@ -23,7 +24,11 @@ export default function Vacancies() {
   if (vacancies.objects) {
     vacanciesJSX = vacancies.objects.map((vacancyObj) => {
       return (
-        <Link href={`/vacancy/${vacancyObj.id}`} key={vacancyObj.id}>
+        <Link
+          href={`/vacancy/${vacancyObj.id}`}
+          key={vacancyObj.id}
+          onClick={() => dispatch(clickedVacancy(vacancyObj))}
+        >
           <VacancyComp
             id={vacancyObj.id}
             catalogues={vacancyObj.catalogues}
