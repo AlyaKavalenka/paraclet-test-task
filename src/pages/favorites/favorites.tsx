@@ -6,8 +6,10 @@ export default function FavoritesPage() {
     <main>
       <aside className={favoritesStyles.favorites}>
         <Header activePage="MarkedPage" />
-        <section className={favoritesStyles.home__main}>
-          <div>Favorites page</div>
+        <section className={favoritesStyles.favorites__main}>
+          <div className={favoritesStyles.favorites__mainWrapper}>
+            <div>Favorites page</div>
+          </div>
         </section>
         <section>pagination block</section>
       </aside>
