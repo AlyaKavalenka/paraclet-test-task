@@ -43,6 +43,7 @@ export default function Vacancies() {
             payment_to={vacancyObj.payment_to}
             payment_from={vacancyObj.payment_from}
             currency={vacancyObj.currency}
+            vacancyRichText={vacancyObj.vacancyRichText}
           />
         </Link>
       );

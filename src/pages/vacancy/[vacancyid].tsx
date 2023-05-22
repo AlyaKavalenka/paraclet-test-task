@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import parse from "html-react-parser";
 import Header from "@/components/Header/Header";
 import vacancyStyles from "./vacancy.module.scss";
 import VacancyComp from "@/components/VacancyComp/VacancyComp";
@@ -27,8 +28,11 @@ export default function VacancyPage() {
               payment_to={vacancyObj.payment_to}
               payment_from={vacancyObj.payment_from}
               currency={vacancyObj.currency}
+              vacancyRichText={vacancyObj.vacancyRichText}
             />
-            <section>Vacancy info</section>
+            <section className={vacancyStyles.vacancy__info}>
+              {parse(vacancyObj.vacancyRichText)}
+            </section>
           </div>
         </section>
       </aside>
