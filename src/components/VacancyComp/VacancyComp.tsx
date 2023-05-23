@@ -2,7 +2,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LocationIcon from "@/assets/svg/locationIcon";
-import StarIcon from "@/assets/svg/starIcon";
+import StarIcon, { StarMode } from "@/assets/svg/starIcon";
 import { IVacancy } from "@/types/types";
 import vacancyCompStyles from "./vacancyComp.module.scss";
 import vacancyPageStyles from "../../pages/vacancy/vacancy.module.scss";
@@ -23,6 +23,7 @@ export default function VacancyComp(props: IVacancy) {
   const currentPatch = useRouter().pathname;
   const [faveStorage, setFaveStorage] = useState<IVacancy[]>([]);
   const [isClicked, setClick] = useState(false);
+  const [isHovered, setHover] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -81,6 +82,16 @@ export default function VacancyComp(props: IVacancy) {
     salary = "";
   }
 
+  const starIconMode = () => {
+    let mode: StarMode = "empty";
+    if (isClicked || faveStorage.findIndex((item) => item.id === id) !== -1) {
+      mode = "full";
+    } else if (isHovered) {
+      mode = "hover";
+    }
+    return mode;
+  };
+
   return (
     <article className={vacancyCompStyles.vacancy}>
       <section className={vacancyCompStyles.vacancy__info}>
@@ -120,15 +131,12 @@ export default function VacancyComp(props: IVacancy) {
             }
           }}
           className={vacancyCompStyles.vacancy__btn}
+          onMouseOver={() => setHover(true)}
+          onFocus={() => setHover(true)}
+          onMouseOut={() => setHover(false)}
+          onBlur={() => setHover(false)}
         >
-          <StarIcon
-            mode={
-              isClicked ||
-              faveStorage.findIndex((item) => item.id === id) !== -1
-                ? "full"
-                : "empty"
-            }
-          />
+          <StarIcon mode={starIconMode()} />
         </button>
       </aside>
     </article>

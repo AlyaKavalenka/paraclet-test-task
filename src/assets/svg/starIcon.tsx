@@ -1,4 +1,4 @@
-type StarMode = "empty" | "full";
+export type StarMode = "empty" | "full" | "hover";
 
 export default function StarIcon(props: { mode: StarMode }) {
   const { mode } = props;
@@ -12,6 +12,10 @@ export default function StarIcon(props: { mode: StarMode }) {
       break;
     case "full":
       fill = "#5E96FC";
+      stroke = "#5E96FC";
+      break;
+    case "hover":
+      fill = "none";
       stroke = "#5E96FC";
       break;
     default:
