@@ -26,9 +26,11 @@ export default function VacancyComp(props: IVacancy) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setFaveStorage(JSON.parse(localStorage.getItem("favorites") || "[]"));
+      const storage = JSON.parse(localStorage.getItem("favorites") || "[]");
+      setFaveStorage(storage);
+      setClick(storage.findIndex((item: IVacancy) => item.id === id) !== -1);
     }
-  }, []);
+  }, [id]);
 
   function addFave() {
     const newFaveObj = {
@@ -44,9 +46,9 @@ export default function VacancyComp(props: IVacancy) {
       vacancyRichText,
     };
 
-    setFaveStorage([...faveStorage, newFaveObj]);
-
     const storage = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    setFaveStorage([...storage, newFaveObj]);
 
     localStorage.setItem("favorites", JSON.stringify([...storage, newFaveObj]));
   }
