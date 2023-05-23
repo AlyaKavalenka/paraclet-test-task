@@ -1,11 +1,17 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/Header/Header";
 import favoritesStyles from "./favorites.module.scss";
-import { useAppSelector } from "@/store/hooks";
 import NoFavorites from "@/components/NoFavorites/NoFavorites";
 import VacancyWithLink from "@/components/VacancyWithLink/VacancyWithLink";
+import { IVacancy } from "@/types/types";
 
 export default function FavoritesPage() {
-  const faveVacancies = useAppSelector((state) => state.favorites.value);
+  const [faveStorage, setFaveStorage] = useState<IVacancy[]>([]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setFaveStorage(JSON.parse(localStorage.getItem("favorites") || "[]"));
+    }
+  }, []);
 
   return (
     <main>
@@ -13,9 +19,9 @@ export default function FavoritesPage() {
         <Header activePage="MarkedPage" />
         <section className={favoritesStyles.favorites__main}>
           <div className={favoritesStyles.favorites__mainWrapper}>
-            {faveVacancies.length ? (
+            {faveStorage.length ? (
               <section className={favoritesStyles.favorites__vacancies}>
-                {faveVacancies.map((item) => (
+                {faveStorage.map((item) => (
                   <VacancyWithLink vacancyObj={item} key={item.id} />
                 ))}
               </section>
@@ -24,7 +30,7 @@ export default function FavoritesPage() {
             )}
           </div>
         </section>
-        {faveVacancies.length ? <section>pagination block</section> : ""}
+        {faveStorage.length ? <section>pagination block</section> : ""}
       </aside>
     </main>
   );

@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import LocationIcon from "@/assets/svg/locationIcon";
 import StarIcon from "@/assets/svg/starIcon";
 import { IVacancy } from "@/types/types";
 import vacancyCompStyles from "./vacancyComp.module.scss";
 import vacancyPageStyles from "../../pages/vacancy/vacancy.module.scss";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addNewFavorite } from "@/store/Slicers/FavoritesSlice";
 
 export default function VacancyComp(props: IVacancy) {
   const {
@@ -22,13 +21,16 @@ export default function VacancyComp(props: IVacancy) {
     vacancyRichText,
   } = props;
   const currentPatch = useRouter().pathname;
-  const dispatch = useAppDispatch();
-  const faveArray = useAppSelector((state) => state.favorites.value);
+  const [faveStorage, setFaveStorage] = useState<IVacancy[]>([]);
+  const [isClicked, setClick] = useState(false);
 
-  const isFave = faveArray.findIndex((item) => item.id === id);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setFaveStorage(JSON.parse(localStorage.getItem("favorites") || "[]"));
+    }
+  }, []);
 
   let currentStyle;
-
   if (currentPatch === "/vacancy/[vacancyid]") {
     currentStyle = vacancyPageStyles;
   } else {
@@ -75,24 +77,38 @@ export default function VacancyComp(props: IVacancy) {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            dispatch(
-              addNewFavorite({
-                id,
-                catalogues,
-                profession,
-                firmName,
-                town,
-                type_of_work,
-                payment_to,
-                payment_from,
-                currency,
-                vacancyRichText,
-              })
-            );
+            setClick(!isClicked);
+            if (typeof window !== undefined) {
+              localStorage.setItem(
+                "favorites",
+                JSON.stringify([
+                  ...JSON.parse(localStorage.getItem("favorites") || "[]"),
+                  {
+                    id,
+                    catalogues,
+                    profession,
+                    firmName,
+                    town,
+                    type_of_work,
+                    payment_to,
+                    payment_from,
+                    currency,
+                    vacancyRichText,
+                  },
+                ])
+              );
+            }
           }}
           className={vacancyCompStyles.vacancy__btn}
         >
-          <StarIcon mode={isFave !== -1 ? "full" : "empty"} />
+          <StarIcon
+            mode={
+              isClicked ||
+              faveStorage.findIndex((item) => item.id === id) !== -1
+                ? "full"
+                : "empty"
+            }
+          />
         </button>
       </aside>
     </article>
