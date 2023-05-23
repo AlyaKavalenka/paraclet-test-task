@@ -30,6 +30,37 @@ export default function VacancyComp(props: IVacancy) {
     }
   }, []);
 
+  function addFave() {
+    const newFaveObj = {
+      id,
+      catalogues,
+      profession,
+      firmName,
+      town,
+      type_of_work,
+      payment_to,
+      payment_from,
+      currency,
+      vacancyRichText,
+    };
+
+    setFaveStorage([...faveStorage, newFaveObj]);
+
+    const storage = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    localStorage.setItem("favorites", JSON.stringify([...storage, newFaveObj]));
+  }
+
+  function deleteFaveById(idx: number) {
+    setFaveStorage(faveStorage.filter((item) => item.id !== idx));
+
+    const filteredStorage = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    ).filter((item: IVacancy) => item.id !== idx);
+
+    localStorage.setItem("favorites", JSON.stringify(filteredStorage));
+  }
+
   let currentStyle;
   if (currentPatch === "/vacancy/[vacancyid]") {
     currentStyle = vacancyPageStyles;
@@ -79,24 +110,11 @@ export default function VacancyComp(props: IVacancy) {
             e.preventDefault();
             setClick(!isClicked);
             if (typeof window !== undefined) {
-              localStorage.setItem(
-                "favorites",
-                JSON.stringify([
-                  ...JSON.parse(localStorage.getItem("favorites") || "[]"),
-                  {
-                    id,
-                    catalogues,
-                    profession,
-                    firmName,
-                    town,
-                    type_of_work,
-                    payment_to,
-                    payment_from,
-                    currency,
-                    vacancyRichText,
-                  },
-                ])
-              );
+              if (isClicked === false) {
+                addFave();
+              } else {
+                deleteFaveById(id);
+              }
             }
           }}
           className={vacancyCompStyles.vacancy__btn}
