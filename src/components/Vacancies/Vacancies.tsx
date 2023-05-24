@@ -1,17 +1,10 @@
-import { useEffect } from "react";
 import { Loader } from "@mantine/core";
-import { fetchVacancies } from "@/store/Slicers/VacanciesSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import { IVacancies } from "@/types/types";
 import vacanciesStyles from "./vacancies.module.scss";
 import VacancyWithLink from "../VacancyWithLink/VacancyWithLink";
 
 export default function Vacancies() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchVacancies());
-  }, [dispatch]);
   const vacancies: IVacancies = useAppSelector(
     (state) => state.vacanciesSlice.value
   );
