@@ -1,18 +1,12 @@
 import Link from "next/link";
-import { useAppDispatch } from "@/store/hooks";
 import { IVacancy } from "@/types/types";
-import { clickedVacancy } from "@/store/Slicers/ClickedVacancySlice";
 import VacancyComp from "../VacancyComp/VacancyComp";
 
 export default function VacancyWithLink(props: { vacancyObj: IVacancy }) {
-  const dispatch = useAppDispatch();
   const { vacancyObj } = props;
 
   return (
-    <Link
-      href={`/vacancy/${vacancyObj.id}`}
-      onClick={() => dispatch(clickedVacancy(vacancyObj))}
-    >
+    <Link href={`/vacancy/${vacancyObj.id}`}>
       <VacancyComp
         id={vacancyObj.id}
         catalogues={vacancyObj.catalogues}
