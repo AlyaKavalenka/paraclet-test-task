@@ -37,7 +37,16 @@ export default function Home() {
             }
           />
           <section className={homeStyles.searchVacancy}>
-            <Search />
+            <Search
+              updateFilter={(value: FetchVacanciesParams) =>
+                setFilter({
+                  catalogues: filter.catalogues,
+                  payment_from: filter.payment_from,
+                  payment_to: filter.payment_to,
+                  keyword: value.keyword,
+                })
+              }
+            />
             <Vacancies />
           </section>
         </section>

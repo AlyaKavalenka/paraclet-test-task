@@ -2,15 +2,26 @@ import { Button, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import SearchIcon from "@/assets/svg/searchIcon";
 import searchStyle from "./search.module.scss";
+import { FetchVacanciesParams } from "@/types/types";
 
-export default function Search() {
+interface ISearchProps {
+  updateFilter: (value: FetchVacanciesParams) => void;
+}
+
+export default function Search(props: ISearchProps) {
+  const { updateFilter } = props;
   const form = useForm({
     initialValues: {
       search: "",
     },
   });
   return (
-    <form className={searchStyle.search} onSubmit={(value) => {}}>
+    <form
+      className={searchStyle.search}
+      onSubmit={form.onSubmit((value) => {
+        updateFilter({ keyword: value.search });
+      })}
+    >
       <TextInput
         placeholder="Введите название вакансии"
         icon={<SearchIcon />}
