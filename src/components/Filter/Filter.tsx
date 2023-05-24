@@ -51,7 +51,14 @@ export default function Filter() {
     >
       <section className={filterStyles.filter__header}>
         <span className={filterStyles.filter__headerText}>Фильтры</span>
-        <button type="button" className={filterStyles.filter__resetBtn}>
+        <button
+          type="button"
+          className={filterStyles.filter__resetBtn}
+          onClick={() => {
+            form.reset();
+            setFormFields({ catalogues: "", payment_from: "", payment_to: "" });
+          }}
+        >
           <span>Сбросить все</span>
           <CrossIcon />
         </button>
