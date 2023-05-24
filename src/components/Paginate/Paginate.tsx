@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { IVacancy } from "@/types/types";
 import VacancyWithLink from "../VacancyWithLink/VacancyWithLink";
+import paginateStyles from "./paginate.module.scss";
+import Arrow from "@/assets/svg/arrow";
 
 export default function Paginate(props: { data: IVacancy[] }) {
   const { data } = props;
@@ -28,12 +30,18 @@ export default function Paginate(props: { data: IVacancy[] }) {
       ))}
       <ReactPaginate
         breakLabel="..."
-        nextLabel=">"
+        nextLabel={<Arrow />}
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         pageCount={pageCount}
-        previousLabel="<"
+        previousLabel={<Arrow />}
         renderOnZeroPageCount={null}
+        containerClassName={paginateStyles.paginate}
+        pageClassName={paginateStyles.paginate__page}
+        previousClassName={paginateStyles.paginate__prevPage}
+        nextClassName={paginateStyles.paginate__nextPage}
+        activeClassName={paginateStyles.paginate__active}
+        disabledClassName={paginateStyles.paginate__disabled}
       />
     </>
   );

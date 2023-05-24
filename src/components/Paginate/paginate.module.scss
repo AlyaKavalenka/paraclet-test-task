@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.paginate {
+  display: flex;
+  gap: 8px;
+  align-self: center;
+
+  &__page,
+  &__prevPage,
+  &__nextPage {
+    @include border($color: $grey-300, $rad: 4px);
+
+    font-family: Roboto, sans-serif;
+    list-style-type: none;
+    cursor: pointer;
+
+    background: $white;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+
+      color: $black;
+    }
+  }
+
+  &__active {
+    @include border($color: $blue-500-main, $rad: 4px);
+
+    background: $blue-500-main;
+
+    a {
+      color: $white;
+    }
+  }
+
+  &__prevPage,
+  &__nextPage {
+    svg {
+      fill: $grey-600;
+    }
+  }
+
+  &__disabled {
+    svg {
+      fill: $grey-300
+    }
+  }
+
+  &__nextPage {
+    transform: rotate(180deg);
+  }
+}
