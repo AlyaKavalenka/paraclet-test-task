@@ -54,7 +54,6 @@ export default function Filter(pros: IFilterProps) {
           className={filterStyles.filter__resetBtn}
           onClick={() => {
             form.reset();
-            // todo: add new func for reset
             updateFilter({
               catalogues: "",
               payment_from: "",
