@@ -2,6 +2,7 @@ import { Loader } from "@mantine/core";
 import { useAppSelector } from "@/store/hooks";
 import vacanciesStyles from "./vacancies.module.scss";
 import Paginate from "../Paginate/Paginate";
+import EmptyPageState from "../EmptyPageState/emptyPageState";
 
 export default function Vacancies() {
   const vacancies = useAppSelector((state) => state.vacanciesSlice.value);
@@ -21,10 +22,15 @@ export default function Vacancies() {
         )}
         {error && <h3>Something went wrong...</h3>}
       </section>
-      {vacancies.objects && (
+      {(vacancies.objects || []).length > 0 ? (
         <section className={vacanciesStyles.vacanciesBlock__vacancies}>
           <Paginate data={vacancies.objects} />
         </section>
+      ) : (
+        <EmptyPageState
+          text="Упс, ничего не нашлось! :("
+          isVisibleBtn={false}
+        />
       )}
     </div>
   );
