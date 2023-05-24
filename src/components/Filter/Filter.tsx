@@ -1,27 +1,25 @@
 import { useForm } from "@mantine/form";
 import { Select, NumberInput, Button } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import filterStyles from "./filter.module.scss";
 import Down from "@/assets/svg/down";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchCatalogues } from "@/store/Slicers/CataloguesSlice";
 import CrossIcon from "@/assets/svg/crossIcon";
-import { fetchVacancies } from "@/store/Slicers/VacanciesSlice";
 import { FetchVacanciesParams } from "@/types/types";
 
-export default function Filter() {
+interface IFilterProps {
+  updateFilter: (value: FetchVacanciesParams) => void;
+}
+
+export default function Filter(pros: IFilterProps) {
   const dispatch = useAppDispatch();
-  const [formFields, setFormFields] = useState<FetchVacanciesParams>({
-    catalogues: "",
-    payment_from: "",
-    payment_to: "",
-  });
 
   useEffect(() => {
     dispatch(fetchCatalogues());
-    dispatch(fetchVacancies(formFields));
-  }, [dispatch, formFields]);
+  }, [dispatch]);
 
+  const { updateFilter } = pros;
   const catalogues = useAppSelector((state) => state.cataloguesSlice.value);
   const cataloguesTitles = catalogues.map((item) => item.title_rus);
 
@@ -42,7 +40,7 @@ export default function Filter() {
         const keyFromSphere = catalogues.find(
           (item) => item.title_rus === value.sphere
         );
-        setFormFields({
+        updateFilter({
           catalogues: keyFromSphere ? keyFromSphere.key.toString() : "",
           payment_from: value.salary.from.toString() || "",
           payment_to: value.salary.to.toString() || "",
@@ -56,7 +54,7 @@ export default function Filter() {
           className={filterStyles.filter__resetBtn}
           onClick={() => {
             form.reset();
-            setFormFields({ catalogues: "", payment_from: "", payment_to: "" });
+            updateFilter({ catalogues: "", payment_from: "", payment_to: "" });
           }}
         >
           <span>Сбросить все</span>
