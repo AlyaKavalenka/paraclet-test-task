@@ -11,11 +11,16 @@ import { FetchVacanciesParams, IVacancies } from "@/types/types";
 
 export const fetchVacancies = createAsyncThunk(
   "vacancies/fetchVacancies",
-  async ({ catalogues, payment_from, payment_to }: FetchVacanciesParams) => {
+  async ({
+    catalogues,
+    payment_from,
+    payment_to,
+    keyword,
+  }: FetchVacanciesParams) => {
     const config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${BASE_URL}/vacancies/?catalogues=${catalogues}&payment_from=${payment_from}&payment_to=${payment_to}`,
+      url: `${BASE_URL}/vacancies/?catalogues=${catalogues}&payment_from=${payment_from}&payment_to=${payment_to}&keyword=${keyword}`,
       headers: {
         "x-secret-key": X_SECRET_KEY,
         "x-api-app-id": X_API_APP_ID,

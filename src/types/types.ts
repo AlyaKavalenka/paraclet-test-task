@@ -40,4 +40,5 @@ export interface FetchVacanciesParams {
   catalogues?: string;
   payment_from?: string;
   payment_to?: string;
+  keyword?: string;
 }
