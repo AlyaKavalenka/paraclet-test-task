@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { Pagination } from "@mantine/core";
 import Header from "@/components/Header/Header";
 import homeStyles from "./index.module.scss";
 import Filter from "@/components/Filter/Filter";
 import Search from "@/components/Search/Search";
 import Vacancies from "@/components/Vacancies/Vacancies";
-import { FetchVacanciesParams } from "@/types/types";
-import { useAppDispatch } from "@/store/hooks";
+import { FetchVacanciesParams, IVacancies, IVacancy } from "@/types/types";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { fetchVacancies } from "@/store/Slicers/VacanciesSlice";
 
 export default function Home() {
@@ -20,6 +21,19 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchVacancies(filter));
   }, [dispatch, filter]);
+
+  const itemsPerPage = 4;
+  const [activePage, setPage] = useState(1);
+  const vacancies: IVacancies = useAppSelector(
+    (state) => state.vacanciesSlice.value
+  );
+  const isloading = useAppSelector((state) => state.vacanciesSlice.isLoading);
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems: IVacancy[] = (vacancies.objects || []).slice(
+    itemOffset,
+    endOffset
+  );
 
   return (
     <main>
@@ -47,10 +61,22 @@ export default function Home() {
                 })
               }
             />
-            <Vacancies />
+            <Vacancies currentItems={currentItems} />
           </section>
         </section>
-        <section>pagination block</section>
+        {!isloading && (
+          <Pagination
+            total={10}
+            value={activePage}
+            onChange={(e) => {
+              setPage(e);
+              setItemOffset(
+                (activePage * itemsPerPage) % vacancies.objects.length
+              );
+            }}
+            position="center"
+          />
+        )}
       </aside>
     </main>
   );

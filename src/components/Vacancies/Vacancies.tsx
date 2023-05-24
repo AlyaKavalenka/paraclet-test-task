@@ -1,13 +1,11 @@
 import { Loader } from "@mantine/core";
 import { useAppSelector } from "@/store/hooks";
-import { IVacancies } from "@/types/types";
+import { IVacancy } from "@/types/types";
 import vacanciesStyles from "./vacancies.module.scss";
 import VacancyWithLink from "../VacancyWithLink/VacancyWithLink";
 
-export default function Vacancies() {
-  const vacancies: IVacancies = useAppSelector(
-    (state) => state.vacanciesSlice.value
-  );
+export default function Vacancies(props: { currentItems: IVacancy[] }) {
+  const { currentItems } = props;
   const isLoading = useAppSelector((state) => state.vacanciesSlice.isLoading);
   const error = useAppSelector((state) => state.vacanciesSlice.error);
 
@@ -24,9 +22,9 @@ export default function Vacancies() {
         )}
         {error && <h3>Something went wrong...</h3>}
       </section>
-      {vacancies.objects && (
+      {currentItems && (
         <section className={vacanciesStyles.vacanciesBlock__vacancies}>
-          {vacancies.objects.map((item) => (
+          {currentItems.map((item) => (
             <VacancyWithLink vacancyObj={item} key={item.id} />
           ))}
         </section>
