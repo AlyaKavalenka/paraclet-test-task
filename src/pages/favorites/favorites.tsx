@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/Header/Header";
 import favoritesStyles from "./favorites.module.scss";
-import NoFavorites from "@/components/NoFavorites/NoFavorites";
+import EmptyPageState from "@/components/EmptyPageState/emptyPageState";
 import { IVacancy } from "@/types/types";
 import Paginate from "@/components/Paginate/Paginate";
 
@@ -24,7 +24,7 @@ export default function FavoritesPage() {
                 <Paginate data={faveStorage} />
               </section>
             ) : (
-              <NoFavorites />
+              <EmptyPageState text="Упс, здесь еще ничего нет!" isVisibleBtn />
             )}
           </div>
         </section>

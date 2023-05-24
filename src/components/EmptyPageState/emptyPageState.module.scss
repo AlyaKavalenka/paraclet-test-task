@@ -1,7 +1,8 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.nofaves {
+/* stylelint-disable-next-line selector-class-pattern */
+.emptyPageState {
   display: flex;
   flex-direction: column;
   gap: 32px;
