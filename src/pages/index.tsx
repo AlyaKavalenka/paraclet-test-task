@@ -50,7 +50,6 @@ export default function Home() {
             <Vacancies />
           </section>
         </section>
-        <section>pagination block</section>
       </aside>
     </main>
   );

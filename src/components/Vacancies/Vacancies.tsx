@@ -1,13 +1,10 @@
 import { Loader } from "@mantine/core";
 import { useAppSelector } from "@/store/hooks";
-import { IVacancies } from "@/types/types";
 import vacanciesStyles from "./vacancies.module.scss";
-import VacancyWithLink from "../VacancyWithLink/VacancyWithLink";
+import Paginate from "../Paginate/Paginate";
 
 export default function Vacancies() {
-  const vacancies: IVacancies = useAppSelector(
-    (state) => state.vacanciesSlice.value
-  );
+  const vacancies = useAppSelector((state) => state.vacanciesSlice.value);
   const isLoading = useAppSelector((state) => state.vacanciesSlice.isLoading);
   const error = useAppSelector((state) => state.vacanciesSlice.error);
 
@@ -26,9 +23,7 @@ export default function Vacancies() {
       </section>
       {vacancies.objects && (
         <section className={vacanciesStyles.vacanciesBlock__vacancies}>
-          {vacancies.objects.map((item) => (
-            <VacancyWithLink vacancyObj={item} key={item.id} />
-          ))}
+          <Paginate data={vacancies.objects} />
         </section>
       )}
     </div>
