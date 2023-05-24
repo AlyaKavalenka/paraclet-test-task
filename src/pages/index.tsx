@@ -27,7 +27,7 @@ export default function Home() {
   const vacancies: IVacancies = useAppSelector(
     (state) => state.vacanciesSlice.value
   );
-  const isloading = useAppSelector((state) => state.vacanciesSlice.isLoading);
+  const isLoading = useAppSelector((state) => state.vacanciesSlice.isLoading);
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems: IVacancy[] = (vacancies.objects || []).slice(
@@ -64,9 +64,9 @@ export default function Home() {
             <Vacancies currentItems={currentItems} />
           </section>
         </section>
-        {!isloading && (
+        {!isLoading && (
           <Pagination
-            total={10}
+            total={vacancies.objects.length}
             value={activePage}
             onChange={(e) => {
               setPage(e);
