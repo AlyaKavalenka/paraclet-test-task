@@ -7,15 +7,15 @@ import {
   X_API_APP_ID,
   X_SECRET_KEY,
 } from "@/utils/request";
-import { IVacancies } from "@/types/types";
+import { FetchVacanciesParams, IVacancies } from "@/types/types";
 
 export const fetchVacancies = createAsyncThunk(
   "vacancies/fetchVacancies",
-  async () => {
+  async ({ catalogues, payment_from, payment_to }: FetchVacanciesParams) => {
     const config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `${BASE_URL}/vacancies/`,
+      url: `${BASE_URL}/vacancies/?catalogues=${catalogues}&payment_from=${payment_from}&payment_to=${payment_to}`,
       headers: {
         "x-secret-key": X_SECRET_KEY,
         "x-api-app-id": X_API_APP_ID,
