@@ -8,6 +8,18 @@
 
   background: $white;
 
+  @media (max-width: 650px) {
+    gap: 1vw;
+    justify-content: space-between;
+    padding: 1.66vw 6vw;
+  }
+
+  @media (max-width: 550px) {
+    .logo {
+      transform: scale(.8);
+    }
+  }
+
   .nav {
     display: flex;
     gap: 4.16vw;

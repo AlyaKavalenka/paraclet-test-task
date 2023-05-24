@@ -1,3 +1,5 @@
+import headerStyles from "../../components/Header/header.module.scss";
+
 export default function Logo() {
   return (
     <svg
@@ -6,6 +8,7 @@ export default function Logo() {
       viewBox="0 0 141 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={headerStyles.logo}
     >
       <path
         fillRule="evenodd"

@@ -16,6 +16,10 @@
 
   background: $white;
 
+  @media (max-width: 340px) {
+    width: calc(98vw);
+  }
+
   &__input {
     width: 100%;
 
