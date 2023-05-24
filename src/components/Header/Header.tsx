@@ -30,7 +30,7 @@ export default function Header(props: IHeaderProps) {
           Поиск Вакансий
         </Link>
         <Link
-          href="/"
+          href="/favorites/favorites"
           className={
             HeaderStyles.nav__link || activePage === "MarkedPage"
               ? HeaderStyles.nav__link_active

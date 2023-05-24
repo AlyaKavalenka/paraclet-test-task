@@ -1,17 +1,70 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import LocationIcon from "@/assets/svg/locationIcon";
-import StarIcon from "@/assets/svg/starIcon";
+import StarIcon, { StarMode } from "@/assets/svg/starIcon";
 import { IVacancy } from "@/types/types";
 import vacancyCompStyles from "./vacancyComp.module.scss";
 import vacancyPageStyles from "../../pages/vacancy/vacancy.module.scss";
 
 export default function VacancyComp(props: IVacancy) {
-  const { payment_from, payment_to, currency, profession, type_of_work, town } =
-    props;
+  const {
+    payment_from,
+    payment_to,
+    currency,
+    profession,
+    type_of_work,
+    town,
+    id,
+    catalogues,
+    firmName,
+    vacancyRichText,
+  } = props;
   const currentPatch = useRouter().pathname;
-  let currentStyle;
+  const [faveStorage, setFaveStorage] = useState<IVacancy[]>([]);
+  const [isClicked, setClick] = useState(false);
+  const [isHovered, setHover] = useState(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storage = JSON.parse(localStorage.getItem("favorites") || "[]");
+      setFaveStorage(storage);
+      setClick(storage.findIndex((item: IVacancy) => item.id === id) !== -1);
+    }
+  }, [id]);
+
+  function addFave() {
+    const newFaveObj = {
+      id,
+      catalogues,
+      profession,
+      firmName,
+      town,
+      type_of_work,
+      payment_to,
+      payment_from,
+      currency,
+      vacancyRichText,
+    };
+
+    const storage = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    setFaveStorage([...storage, newFaveObj]);
+
+    localStorage.setItem("favorites", JSON.stringify([...storage, newFaveObj]));
+  }
+
+  function deleteFaveById(idx: number) {
+    setFaveStorage(faveStorage.filter((item) => item.id !== idx));
+
+    const filteredStorage = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    ).filter((item: IVacancy) => item.id !== idx);
+
+    localStorage.setItem("favorites", JSON.stringify(filteredStorage));
+  }
+
+  let currentStyle;
   if (currentPatch === "/vacancy/[vacancyid]") {
     currentStyle = vacancyPageStyles;
   } else {
@@ -28,6 +81,16 @@ export default function VacancyComp(props: IVacancy) {
   } else {
     salary = "";
   }
+
+  const starIconMode = () => {
+    let mode: StarMode = "empty";
+    if (isClicked || faveStorage.findIndex((item) => item.id === id) !== -1) {
+      mode = "full";
+    } else if (isHovered) {
+      mode = "hover";
+    }
+    return mode;
+  };
 
   return (
     <article className={vacancyCompStyles.vacancy}>
@@ -58,11 +121,22 @@ export default function VacancyComp(props: IVacancy) {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            console.log("click on star");
+            setClick(!isClicked);
+            if (typeof window !== undefined) {
+              if (isClicked === false) {
+                addFave();
+              } else {
+                deleteFaveById(id);
+              }
+            }
           }}
           className={vacancyCompStyles.vacancy__btn}
+          onMouseOver={() => setHover(true)}
+          onFocus={() => setHover(true)}
+          onMouseOut={() => setHover(false)}
+          onBlur={() => setHover(false)}
         >
-          <StarIcon mode="empty" />
+          <StarIcon mode={starIconMode()} />
         </button>
       </aside>
     </article>
