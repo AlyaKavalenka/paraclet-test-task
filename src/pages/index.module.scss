@@ -11,6 +11,19 @@
     grid-template-columns: 1fr 2fr;
     gap: 1.94vw;
     padding: 0 11.25vw;
+
+    @media (max-width: 660px) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 430px) {
+      padding: 0 5vw;
+    }
+
+    @media (max-width: 360px) {
+      padding: 0 1vw;
+    }
   }
 
   /* stylelint-disable-next-line selector-class-pattern */

@@ -12,6 +12,10 @@
 
   background: $white;
 
+  @media (max-width: 340px) {
+    width: calc(98vw);
+  }
+
   &__info {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,10 @@
     font-weight: 600;
     line-height: 1.2;
     color: $blue-500-main;
+
+    @media (max-width: 400px) {
+      font-size: 1.07rem;
+    }
   }
 
   &__salaryNType {

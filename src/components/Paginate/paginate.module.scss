@@ -5,6 +5,11 @@
   display: flex;
   gap: 8px;
   align-self: center;
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+
+  list-style-type: none;
 
   &__page,
   &__prevPage,
@@ -12,7 +17,6 @@
     @include border($color: $grey-300, $rad: 4px);
 
     font-family: Roboto, sans-serif;
-    list-style-type: none;
     cursor: pointer;
 
     background: $white;
