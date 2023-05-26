@@ -26,7 +26,11 @@ export default function Paginate(props: { data: IVacancy[] }) {
   return (
     <>
       {currentItems.map((item) => (
-        <VacancyWithLink vacancyObj={item} key={item.id} />
+        <VacancyWithLink
+          vacancyObj={item}
+          key={item.id}
+          data-elem={`vacancy-${item.id}`}
+        />
       ))}
       <ReactPaginate
         breakLabel="..."

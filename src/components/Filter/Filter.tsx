@@ -72,6 +72,7 @@ export default function Filter(pros: IFilterProps) {
             data={cataloguesTitles}
             label="Отрасль"
             rightSection={<Down />}
+            data-elem="industry-select"
             {...form.getInputProps("sphere")}
           />
         </div>
@@ -81,15 +82,21 @@ export default function Filter(pros: IFilterProps) {
             label="Оклад"
             {...form.getInputProps("salary.from")}
             className={filterStyles.filter__numberInput}
+            data-elem="salary-from-input"
           />
           <NumberInput
             placeholder="До"
             {...form.getInputProps("salary.to")}
             className={filterStyles.filter__numberInput}
+            data-elem="salary-to-input"
           />
         </div>
       </section>
-      <Button type="submit" className={filterStyles.filter__btn}>
+      <Button
+        type="submit"
+        className={filterStyles.filter__btn}
+        data-elem="search-button"
+      >
         Применить
       </Button>
     </form>

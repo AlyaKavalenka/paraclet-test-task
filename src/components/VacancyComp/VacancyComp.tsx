@@ -130,6 +130,7 @@ export default function VacancyComp(props: IVacancy) {
               }
             }
           }}
+          data-elem={`vacancy-${id}-shortlist-button`}
           className={vacancyCompStyles.vacancy__btn}
           onMouseOver={() => setHover(true)}
           onFocus={() => setHover(true)}
