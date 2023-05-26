@@ -27,8 +27,13 @@ export default function Search(props: ISearchProps) {
         icon={<SearchIcon />}
         className={searchStyle.search__input}
         {...form.getInputProps("search")}
+        data-elem="search-input"
       />
-      <Button className={searchStyle.search__btn} type="submit">
+      <Button
+        className={searchStyle.search__btn}
+        type="submit"
+        data-elem="search-button"
+      >
         Поиск
       </Button>
     </form>
